@@ -1,70 +1,74 @@
-# :package_name
+#Potato ORM
+Potato ORM is a lightweight ORM based on concepts
+borrowed from the laravel framework
 
-[![Latest Version on Packagist][ico-version]][link-packagist]
-[![Software License][ico-license]](LICENSE.md)
-[![Build Status][ico-travis]][link-travis]
-[![Coverage Status][ico-scrutinizer]][link-scrutinizer]
-[![Quality Score][ico-code-quality]][link-code-quality]
-[![Total Downloads][ico-downloads]][link-downloads]
 
-**Note:** Replace ```:author_name``` ```:author_username``` ```:author_website``` ```:author_email``` ```:package_name``` ```:package_description``` with their correct values in [README.md](README.md), [CHANGELOG.md](CHANGELOG.md), [CONTRIBUTING.md](CONTRIBUTING.md), [LICENSE.md](LICENSE.md) and [composer.json](composer.json) files, then delete this line.
+#Testing
+ The phpunit framework for testing is used to perform
+ unit test on the classes. The TDD principle has been
+ employed to make the application robust
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what
-PSRs you support to avoid any confusion with users and contributors.
+ Run this in your terminal to execute the tests
+ ```````
+ /vendor/bin/phpunit
+`````````
 
-## Install
+#Install
 
-Via Composer
+- To install this package, PHP 5.5+ and Composer are required
 
-``` bash
-$ composer require league/:package_name
-```
+``````
+composer require dara/potato
+``````
 
-## Usage
+#usage
 
-``` php
-$skeleton = new League\Skeleton();
-echo $skeleton->echoPhrase('Hello, League!');
-```
+- Save a new record
+
+````````
+$user = new User();
+$user->username = "drsumo";
+$user->password = "ppkksdjs";
+$user->email = "mail@mail.com";
+$user->save();
+`````````
+- Find one record
+
+``````
+$user = User::find($id);
+``````
+- Find all records
+
+``````
+$allUsers = User::getAll();
+``````
+- Update an existing record
+
+``````
+$user = User::find($id);
+$user->email = "newemail@mail.com";
+$user->username = "rockefeller";
+$user->save();
+``````
+- Delete an existing record 
+
+````````
+$delete = User::destroy($id):
+````````
+
+
+
 
 ## Change log
-
-Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
-
-## Testing
-
-``` bash
-$ composer test
-```
+Please check out [CHANGELOG](CHANGELOG.md) file for information on what has changed recently.
 
 ## Contributing
-
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
-
-## Security
-
-If you discover any security related issues, please email :author_email instead of using the issue tracker.
+Please check out [CONTRIBUTING](CONTRIBUTING.md) file for detailed contribution guidelines.
 
 ## Credits
-
-- [:author_name][link-author]
-- [All Contributors][link-contributors]
+Potato-ORM is maintained by `Dara Oladosu`.
 
 ## License
+Potato-ORM is released under the MIT Licence. See the bundled [LICENSE](LICENSE.md) file for more details.
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/league/:package_name.svg?style=flat-square
-[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/thephpleague/:package_name/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/thephpleague/:package_name.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/thephpleague/:package_name.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/league/:package_name.svg?style=flat-square
-
-[link-packagist]: https://packagist.org/packages/league/:package_name
-[link-travis]: https://travis-ci.org/thephpleague/:package_name
-[link-scrutinizer]: https://scrutinizer-ci.com/g/thephpleague/:package_name/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/thephpleague/:package_name
-[link-downloads]: https://packagist.org/packages/league/:package_name
-[link-author]: https://github.com/:author_username
-[link-contributors]: ../../contributors
