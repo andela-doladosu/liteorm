@@ -28,7 +28,7 @@ abstract class BaseModel
         $dotenv->load();
     }
 
-    
+
     /**
      * Create an instance of the called model
      * 
@@ -104,6 +104,18 @@ abstract class BaseModel
         array_push($model->resultRows, $row);
         
         return $model;
+    }
+
+
+    /**
+     * Return the database rows 
+     * 
+     * @param $id
+     * @return mixed
+     */
+    public static function find($id = null)
+    {
+        return self::doSearch($id);
     }
 
 }
