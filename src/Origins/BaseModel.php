@@ -256,4 +256,45 @@ abstract class BaseModel
         return $update->execute();
     }
 
+
+    /**
+    * Call doDelete function if the specified id exists
+    * 
+    * @param $id
+    * @return string
+    */
+    public static function destroy($id)
+    {
+        return self::confirmIdExists($id) ? doDelete($id) : 'false';
+    }
+
+
+    /**
+     * Check if an id exists
+     * 
+     * @param $id
+     * @return mixed
+     */
+    protected static function confirmIdExists($id)
+    {
+        return self::find($id)->resultRows[0];
+    }  
+
+
+    /**
+     * Delete an existing row from the database
+     * 
+     * @param $id
+     * @return string
+     */
+    protected static function doDelete($id)
+    {
+        $model = $this->createModelInstance();
+        $tableName = $model->getTableName($model->className);
+        $delete = $model->connection->prepare('delete from '.$tableName.' where id ='.$id);
+        $delete->execute();
+
+        return 'true';
+    }
+
 }
