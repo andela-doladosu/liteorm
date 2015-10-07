@@ -5,6 +5,7 @@ namespace Dara\Helpers;
 use Dotenv;
 use PDO;
 
+
 trait BaseModelHelper
 {
 
