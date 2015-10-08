@@ -1,9 +1,8 @@
 {
-    "name": "dara/potato-orm",
+    "name": "dara/potatoorm",
     "description": "A database management system",
     "keywords": [
         "Dara",
-        "potato",
         "ORM",
         "database"
     ],
