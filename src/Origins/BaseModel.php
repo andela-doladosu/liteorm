@@ -24,7 +24,7 @@ abstract class BaseModel
      * The directory that contains your .env file
      * @var string
      */
-    protected $envDirectory = __DIR__.'/../..';
+    protected $envDirectory;
 
     /**
      * An instance of the Connection class
@@ -44,6 +44,7 @@ abstract class BaseModel
 
     public function __construct()
     {
+        $this->envDirectory = $_SERVER['DOCUMENT_ROOT'];
         $this->loadEnv();
         $this->connection = new Connection($_ENV['P_DRIVER'], $_ENV['P_HOST'], $_ENV['P_DBNAME'], $_ENV['P_USER'], $_ENV['P_PASS']);
         $this->className = get_called_class();
