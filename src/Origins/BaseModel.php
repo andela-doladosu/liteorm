@@ -19,6 +19,11 @@ abstract class BaseModel
      */
     protected $className;
 
+    /**
+     * The directory that contains your .env file
+     * @var string
+     */
+    protected $envDirectory = __DIR__.'/../..';
 
     /**
      * An instance of the Connection class
