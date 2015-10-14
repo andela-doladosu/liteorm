@@ -4,6 +4,7 @@ namespace Dara\Origins;
 
 use PDO;
 use Dotenv;
+use Exception;
 
 
 abstract class BaseModel
@@ -152,7 +153,11 @@ abstract class BaseModel
         $tableName = $this->getTableName($this->className);
         $insert = $this->connection->prepare('insert into '.$tableName.'('.$columns.') values ('.$values.')');
 
-        return $insert->execute() ? 'Row inserted successfully' : 'An error occured, unable to insert row';
+        if ($insert->execute()) { 
+            return 'Row inserted successfully'; 
+        } else { 
+            throw new Exception("Unable to Insert new row", 1); 
+        } 
     }
 
     /**
@@ -173,7 +178,11 @@ abstract class BaseModel
         $allUpdates = implode(', ' , $updateDetails);
         $update = $this->connection->prepare('update '.$tableName.' set '. $allUpdates.' where id='.$this->resultRows[0]['id']);
        
-        return $update->execute();
+        if ($update->execute()) { 
+            return 'Row updated';
+        } else { 
+            throw new Exception("Unable to update row"); 
+        }
     }
 
 
@@ -185,7 +194,11 @@ abstract class BaseModel
     */
     public static function destroy($id)
     {
-        return self::confirmIdExists($id) ? doDelete($id) : 'false';
+        if (self::confirmIdExists($id)) {
+            self::doDelete($id); 
+        } else { 
+            throw new Exception('Now rows found with ID '.$id.' in the database, it may have been already deleted'); 
+        }
     }
 
     /**
