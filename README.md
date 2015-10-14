@@ -20,7 +20,16 @@ borrowed from the laravel framework
 ``````
 composer require dara/potato
 ``````
+#Environment variables
 
+In order to use this package, you need to create a `.env` file with the following details provided
+`````
+P_DRIVER = 'mysql';
+P_HOST   = 'localhost';
+P_DBNAME = 'db_name';
+P_USER   = 'db_username';
+P_PASS   = 'db_password';
+`````
 #usage
 
 - Save a new record
