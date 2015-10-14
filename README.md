@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/andela/chopbox.svg?branch=staging)](https://travis-ci.org/andela/chopbox)
+
 #Potato ORM
 Potato ORM is a lightweight ORM based on concepts
 borrowed from the laravel framework
