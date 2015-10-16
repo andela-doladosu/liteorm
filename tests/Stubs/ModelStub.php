@@ -8,7 +8,7 @@ class ModelStub extends BaseModel
 {
     public function loadEnv()
     {
-        $_ENV['P_DRIVER'] = '';
+        $_ENV['P_DRIVER'] = 'mysql';
         $_ENV['P_HOST']   = 'localhost';
         $_ENV['P_DBNAME'] = 'potato';
         $_ENV['P_USER']   = 'root';
