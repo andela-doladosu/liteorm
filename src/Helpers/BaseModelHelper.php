@@ -3,7 +3,7 @@
 namespace Dara\Helpers;
 
 use PDO;
-use Dotenv;
+use Dotenv\Dotenv;
 
 
 trait BaseModelHelper
@@ -16,7 +16,7 @@ trait BaseModelHelper
      */
     public function loadEnv()
     {
-        $dotenv = new Dotenv\Dotenv($this->envDirectory);
+        $dotenv = new Dotenv($this->envDirectory);
         $dotenv->load();
     }
 
