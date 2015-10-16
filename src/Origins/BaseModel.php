@@ -3,7 +3,6 @@
 namespace Dara\Origins;
 
 use PDO;
-use Dotenv;
 use Exception;
 
 
@@ -22,14 +21,6 @@ abstract class BaseModel
 
 
     /**
-     * An instance of the Connection class
-     * 
-     * @var PDO
-     */
-    protected $connection;
-
-
-    /**
      * Array of table rows
      * 
      * @var array
@@ -39,9 +30,6 @@ abstract class BaseModel
 
     public function __construct()
     {
-        $this->envDirectory = $_SERVER['DOCUMENT_ROOT'];
-        $this->loadEnv();
-        $this->connection = new Connection($_ENV['P_DRIVER'], $_ENV['P_HOST'], $_ENV['P_DBNAME'], $_ENV['P_USER'], $_ENV['P_PASS']);
         $this->className = get_called_class();
     }
 
@@ -79,8 +67,10 @@ abstract class BaseModel
      * @return mixed
      */
     protected static function selectAll($model, $tableName)
-    {
-        $getAll = $model->connection->prepare('select * from '.$tableName);
+    {   
+        $connection = Connection::connect();
+
+        $getAll = $connection->prepare('select * from '.$tableName);
         $getAll->execute();
 
         while ($allRows = $getAll->fetch(PDO::FETCH_ASSOC)) {
@@ -101,7 +91,9 @@ abstract class BaseModel
      */
     protected static function selectOne($model, $tableName, $id)
     {
-        $getAll = $model->connection->prepare('select * from '.$tableName.' where id='.$id);
+        $connection = Connection::connect();
+
+        $getAll = $connection->prepare('select * from '.$tableName.' where id='.$id);
         $getAll->execute();
 
         $row = $getAll->fetch(PDO::FETCH_ASSOC);
@@ -147,7 +139,10 @@ abstract class BaseModel
         $values = '\''.implode('\', \'', $assignedValues['values']).'\'';
 
         $tableName = $this->getTableName($this->className);
-        $insert = $this->connection->prepare('insert into '.$tableName.'('.$columns.') values ('.$values.')');
+
+        $connection = Connection::connect();
+
+        $insert = $connection->prepare('insert into '.$tableName.'('.$columns.') values ('.$values.')');
 
         if ($insert->execute()) { 
             return 'Row inserted successfully'; 
@@ -171,8 +166,10 @@ abstract class BaseModel
             array_push($updateDetails, $assignedValues['columns'][$i]  .' =\''. $assignedValues['values'][$i].'\'');
         }
 
+        $connection = Connection::connect();
+
         $allUpdates = implode(', ' , $updateDetails);
-        $update = $this->connection->prepare('update '.$tableName.' set '. $allUpdates.' where id='.$this->resultRows[0]['id']);
+        $update = $connection->prepare('update '.$tableName.' set '. $allUpdates.' where id='.$this->resultRows[0]['id']);
        
         if ($update->execute()) { 
             return 'Row updated';
@@ -207,7 +204,10 @@ abstract class BaseModel
     {
         $model = $this->createModelInstance();
         $tableName = $model->getTableName($model->className);
-        $delete = $model->connection->prepare('delete from '.$tableName.' where id ='.$id);
+
+        $connection = Connection::connect();
+
+        $delete = $connection->prepare('delete from '.$tableName.' where id ='.$id);
         $delete->execute();
 
         return 'true';

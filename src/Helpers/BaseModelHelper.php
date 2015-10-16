@@ -4,35 +4,11 @@ namespace Dara\Helpers;
 
 use PDO;
 use Dotenv\Dotenv;
+use Dara\Origins\Connection;
 
 
 trait BaseModelHelper
 {
-
-    /**
-     * Load environment variables if they are not available
-     * 
-     * @return null
-     */
-    public function loadEnv()
-    {   
-        if (!$this->checkEnv()) {
-            $dotenv = new Dotenv($this->envDirectory);
-            $dotenv->load();
-        }
-    }
-
-
-    /**
-     * Check if required env variables are available
-     * 
-     * @return bool
-     */
-    private function checkEnv()
-    {
-        return isset($_ENV['P_DBNAME']) ? true : false;
-    }
-
 
     /**
      * Get all the column names in a table
@@ -40,8 +16,10 @@ trait BaseModelHelper
      * @return array
      */
     protected function getTableFields()
-    {
-        $q = $this->connection->prepare('describe '.$this->getTableName($this->className));
+    {   
+        $connection = Connection::connect();
+
+        $q = $connection->prepare('describe '.$this->getTableName($this->className));
         $q->execute();
         
         return $q->fetchAll(PDO::FETCH_COLUMN);        

@@ -3,29 +3,50 @@
 namespace Dara\Origins;
 
 use PDO;
+use Dotenv\Dotenv;
+
 
 class Connection extends PDO
 {
 
-    protected $driver;
+    protected static $driver;
 
-    protected $host;
+    protected static $host;
 
-    protected $dbname;
+    protected static $dbname;
     
-    protected $user; 
+    protected static $user; 
     
-    protected $pass;
+    protected static $pass;
 
-    public function __construct($driver, $host, $dbname, $user, $pass)
-    {
-        $this->driver  = $driver;
-        $this->host    = $host;
-        $this->dbname  = $dbname;
-        $this->user    = $user;
-        $this->pass    = $pass;
 
-        parent::__construct($this->driver.':host='.$this->host.';dbname='.$this->dbname, $this->user, $this->pass);
+    /**
+     * Get environment values from .env file
+     * 
+     * @return null
+     */
+    public static function getEnv()
+    {   
+        $dotEnv = new Dotenv($_SERVER['DOCUMENT_ROOT']);
+        $dotEnv->load();
+        
+        self::$driver  = getenv('P_DRIVER');
+        self::$host    = getenv('P_HOST');
+        self::$dbname  = getenv('P_DBNAME');
+        self::$user    = getenv('P_USER');
+        self::$pass    = getenv('P_PASS');
     }
+
+    /**
+     * Create PDO connections
+     * 
+     * @return PDO
+     */
+    public static function connect()
+    {   
+        self::getEnv();
+        return new PDO(self::$driver.':host='.self::$host.';dbname='.self::$dbname, self::$user, self::$pass);
+    }
+
 
 }
