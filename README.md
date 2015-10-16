@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/andela/chopbox.svg?branch=staging)](https://travis-ci.org/andela/chopbox)
+[![Build Status](https://travis-ci.org/andela-doladosu/potatoorm.svg?branch=master)](https://travis-ci.org/andela-doladosu/potatoorm)
 
 #Potato ORM
 Potato ORM is a lightweight ORM based on concepts
