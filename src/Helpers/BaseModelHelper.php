@@ -10,14 +10,27 @@ trait BaseModelHelper
 {
 
     /**
-     * Load environment variables
+     * Load environment variables if they are not available
      * 
      * @return null
      */
     public function loadEnv()
+    {   
+        if (!$this->checkEnv()) {
+            $dotenv = new Dotenv($this->envDirectory);
+            $dotenv->load();
+        }
+    }
+
+
+    /**
+     * Check if required env variables are available
+     * 
+     * @return bool
+     */
+    private function checkEnv()
     {
-        $dotenv = new Dotenv($this->envDirectory);
-        $dotenv->load();
+        return isset($_ENV['P_DBNAME']) ? true : false;
     }
 
 
