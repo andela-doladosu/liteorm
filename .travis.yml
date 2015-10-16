@@ -16,7 +16,11 @@ matrix:
     - php: hhvm
 
 env: 
-  - DB=mysql
+  - P_HOST   = localhost
+  - P_DRIVER = mysql
+  - P_USER   = root
+  - P_PASS   = ''
+  - P_DBNAME = potato
 
 before_script:
   - composer install
