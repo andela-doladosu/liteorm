@@ -60,6 +60,25 @@ abstract class BaseModel
 
 
     /**
+     * Return details where a column is matched by the given keyword
+     * 
+     * @param  string $table   
+     * @param  string $column  
+     * @param  string $keyword 
+     * @return array          
+     */
+    public function where($table, $column, $keyword)
+    {
+        $connection = Connection::connect();
+
+        $selectValue = $connection->prepare('select * from '.$table.' where '.$column.' = \''.$keyword.'\'');
+        $selectValue->execute();
+
+        return $selectValue->fetch(PDO::FETCH_ASSOC);
+    }
+
+
+    /**
      * Search database for all rows
      * 
      * @param $model
