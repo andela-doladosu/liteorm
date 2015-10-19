@@ -83,8 +83,9 @@ trait BaseModelHelper
      * @return string
      */
     protected function getTableName($model)
-    {  
-        return strtolower(explode('\\', $model)[2]).'s';
+    {   
+        $nameArray = explode('\\', $model);
+        return $nameArray[count($nameArray)-1].'s';
     }
 
 
