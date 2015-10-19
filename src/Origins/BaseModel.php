@@ -188,7 +188,7 @@ abstract class BaseModel
     public static function destroy($id)
     {
         if (self::confirmIdExists($id)) {
-            self::doDelete($id); 
+            return self::doDelete($id); 
         } else { 
             throw new Exception('Now rows found with ID '.$id.' in the database, it may have been already deleted'); 
         }
@@ -202,15 +202,15 @@ abstract class BaseModel
      */
     protected static function doDelete($id)
     {
-        $model = $this->createModelInstance();
+        $model = self::createModelInstance();
         $tableName = $model->getTableName($model->className);
 
         $connection = Connection::connect();
 
         $delete = $connection->prepare('delete from '.$tableName.' where id ='.$id);
-        $delete->execute();
+        return $delete->execute() ? 'deleted successfully' : 'Row not deleted';
 
-        return 'true';
+         
     }
 
 }
