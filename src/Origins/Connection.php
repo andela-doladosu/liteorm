@@ -27,7 +27,7 @@ class Connection extends PDO
      */
     public static function getEnv()
     {   
-        if (!isset(getenv('P_DRIVER'))) {
+        if (null !== (getenv('P_DRIVER'))) {
 
             $dotEnv = new Dotenv($_SERVER['DOCUMENT_ROOT']);
             $dotEnv->load();
