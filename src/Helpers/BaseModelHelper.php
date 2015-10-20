@@ -58,7 +58,7 @@ trait BaseModelHelper
     protected function getAssignedValues()
     {
         $tableFields = $this->getTableFields();
-        $newPropertiesArray = array_slice(get_object_vars($this), 3);
+        $newPropertiesArray = get_object_vars($this);
 
         $columns = $values = $tableData = [];
 

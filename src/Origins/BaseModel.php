@@ -25,7 +25,7 @@ abstract class BaseModel
      * 
      * @var array
      */
-    protected $resultRows = [];
+    public $resultRows = [];
 
 
     public function __construct()
