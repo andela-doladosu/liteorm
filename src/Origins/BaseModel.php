@@ -162,11 +162,11 @@ abstract class BaseModel
         $connection = Connection::connect();
 
         $insert = $connection->prepare('insert into '.$tableName.'('.$columns.') values ('.$values.')');
-
+        var_dump($insert);
         if ($insert->execute()) { 
             return 'Row inserted successfully'; 
         } else { 
-            throw new Exception("Unable to Insert new row", 1); 
+            var_dump($insert->errorInfo()); 
         } 
     }
 
