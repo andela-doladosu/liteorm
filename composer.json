@@ -1,18 +1,18 @@
 {
-    "name": "dara/potatoorm",
+    "name": "dara/liteorm",
     "description": "A database management system",
     "keywords": [
         "Dara",
         "ORM",
         "database"
     ],
-    "homepage": "https://github.com/andela-doladosu/potato-orm",
+    "homepage": "https://github.com/andela-doladosu/liteorm",
     "license": "MIT",
     "authors": [
         {
             "name": "Dara Oladosu",
             "email": "dara.Oladosu@andela.com",
-            "homepage": "http://github.com/aandela-doladosu",
+            "homepage": "http://github.com/andela-doladosu",
             "role": "Developer"
         }
     ],
