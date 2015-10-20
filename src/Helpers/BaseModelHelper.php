@@ -19,7 +19,14 @@ trait BaseModelHelper
     {   
         $connection = Connection::connect();
 
-        $q = $connection->prepare('describe '.$this->getTableName($this->className));
+        $driver = getenv('P_DRIVER');
+
+        if ($driver == 'pgsql') {
+            $describe = '\d ';
+        }
+        $describe = 'describe ';
+        
+        $q = $connection->prepare($describe.$this->getTableName($this->className));
         $q->execute();
         
         return $q->fetchAll(PDO::FETCH_COLUMN);        
