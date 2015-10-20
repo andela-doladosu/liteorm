@@ -41,7 +41,7 @@ trait BaseModelHelper
      */
     protected function getAssignedValues()
     {
-        $newPropertiesArray = get_object_vars($this);
+        $newPropertiesArray = array_slice(get_object_vars($this), 2);
 
         $columns = $values = $tableData = [];
 
