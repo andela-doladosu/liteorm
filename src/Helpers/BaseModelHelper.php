@@ -11,29 +11,6 @@ trait BaseModelHelper
 {
 
     /**
-     * Get all the column names in a table
-     * 
-     * @return array
-     */
-    protected function getTableFields()
-    {   
-        $connection = Connection::connect();
-
-        $driver = getenv('P_DRIVER');
-
-        if ($driver == 'pgsql') {
-            $describe = '\d ';
-        }
-        $describe = 'describe ';
-        
-        $q = $connection->prepare($describe.$this->getTableName($this->className));
-        $q->execute();
-        
-        return $q->fetchAll(PDO::FETCH_COLUMN);        
-    }
-
-
-    /**
      * Create an instance of the called model
      * 
      * @return mixed
@@ -64,16 +41,13 @@ trait BaseModelHelper
      */
     protected function getAssignedValues()
     {
-        $tableFields = $this->getTableFields();
         $newPropertiesArray = get_object_vars($this);
 
         $columns = $values = $tableData = [];
 
         foreach ($newPropertiesArray as $index => $value) {
-            if (in_array($index, $tableFields)) {
                 array_push($columns, $index);
-                array_push( $values, $value);
-            }
+                array_push( $values, $value);  
         }
 
         $tableData['columns'] = $columns;
