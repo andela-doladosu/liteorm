@@ -27,14 +27,17 @@ class Connection extends PDO
      */
     public static function getEnv()
     {   
-        $dotEnv = new Dotenv($_SERVER['DOCUMENT_ROOT']);
-        $dotEnv->load();
-        
+        if (!isset(getenv('P_DRIVER'))) {
+
+            $dotEnv = new Dotenv($_SERVER['DOCUMENT_ROOT']);
+            $dotEnv->load();
+        }    
+      
         self::$driver  = getenv('P_DRIVER');
         self::$host    = getenv('P_HOST');
         self::$dbname  = getenv('P_DBNAME');
         self::$user    = getenv('P_USER');
-        self::$pass    = getenv('P_PASS');
+        self::$pass    = getenv('P_PASS');  
     }
 
     /**
