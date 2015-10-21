@@ -193,7 +193,7 @@ abstract class BaseModel
         if ($update->execute()) { 
             return 'Row updated';
         } else { 
-            throw new Exception("Unable to update row"); 
+            var_dump($update->errorInfo());
         }
     }
 
@@ -227,7 +227,7 @@ abstract class BaseModel
         $connection = Connection::connect();
 
         $delete = $connection->prepare('delete from '.$tableName.' where id ='.$id);
-        return $delete->execute() ? 'deleted successfully' : 'Row not deleted';
+        return $delete->execute() ? 'deleted successfully' : var_dump($delete->errorInfo());
 
          
     }
