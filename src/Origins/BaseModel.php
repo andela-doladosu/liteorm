@@ -162,11 +162,11 @@ abstract class BaseModel
         $connection = Connection::connect();
 
         $insert = $connection->prepare('insert into '.$tableName.'('.$columns.') values ('.$values.')');
-        var_dump($insert);
+
         if ($insert->execute()) { 
             return 'Row inserted successfully'; 
         } else { 
-            var_dump($insert->errorInfo()); 
+            return $insert->errorInfo(); 
         } 
     }
 
@@ -193,7 +193,7 @@ abstract class BaseModel
         if ($update->execute()) { 
             return 'Row updated';
         } else { 
-            var_dump($update->errorInfo());
+            return $update->errorInfo();
         }
     }
 
@@ -227,7 +227,7 @@ abstract class BaseModel
         $connection = Connection::connect();
 
         $delete = $connection->prepare('delete from '.$tableName.' where id ='.$id);
-        return $delete->execute() ? 'deleted successfully' : var_dump($delete->errorInfo());
+        return $delete->execute() ? 'deleted successfully' : $delete->errorInfo();
 
          
     }
